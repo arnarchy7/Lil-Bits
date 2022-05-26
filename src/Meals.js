@@ -1,21 +1,19 @@
-import { React, useState, useEffect } from "react";
-import "./App.css";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import { React, useState, useEffect } from 'react';
+import './App.css';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Meals() {
   const navigate = useNavigate();
 
   const [meals, setMeals] = useState([]);
   const getMeals = async () => {
-    const result = await axios.get(
-      "https://themealdb.com/api/json/v1/1/random.php"
-    );
+    const result = await axios.get('https://themealdb.com/api/json/v1/1/random.php');
     setMeals(result.data.meals);
     // console.log(result.data.meals);
   };
@@ -25,12 +23,12 @@ function Meals() {
   }, []);
 
   const mealToStorage = () => {
-    localStorage.setItem("meal", JSON.stringify(meals));
+    localStorage.setItem('meal', JSON.stringify(meals));
   };
 
   const storeAndNavigate = () => {
     mealToStorage();
-    navigate("/drinks");
+    navigate('/drinks');
   };
   return (
     <Container>
@@ -52,13 +50,13 @@ function Meals() {
             <Button
               block="true"
               style={{
-                backgroundColor: "#C16757",
-                color: "#3d6053",
-                borderRadius: "100px",
-                borderColor: "#3d6053",
-                border: "3px solid",
-                width: "300px",
-                fontWeight: "600",
+                backgroundColor: '#C16757',
+                color: '#3d6053',
+                borderRadius: '100px',
+                borderColor: '#3d6053',
+                border: '3px solid',
+                width: '300px',
+                fontWeight: '600',
               }}
               onClick={() => getMeals()}
             >
@@ -71,13 +69,13 @@ function Meals() {
           <Button
             block="true"
             style={{
-              backgroundColor: "#C16757",
-              color: "#3d6053",
-              borderRadius: "100px",
-              borderColor: "#3d6053",
-              border: "3px solid",
-              width: "200px",
-              fontWeight: "600",
+              backgroundColor: '#C16757',
+              color: '#3d6053',
+              borderRadius: '100px',
+              borderColor: '#3d6053',
+              border: '3px solid',
+              width: '200px',
+              fontWeight: '600',
             }}
             onClick={storeAndNavigate}
           >

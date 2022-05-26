@@ -1,13 +1,14 @@
-import { React, useState, useEffect } from "react";
-import "./App.css";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import styled from "styled-components";
+import { React, useState, useEffect } from 'react';
+import './App.css';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import styled from 'styled-components';
+import Form from 'react-bootstrap/Form';
 
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,16 +31,25 @@ function Drinks() {
 
   const [drinks, setDrinks] = useState([]);
   const getDrinks = async () => {
-    const result = await axios.get("https://api.punkapi.com/v2/beers");
+    const result = await axios.get('https://api.punkapi.com/v2/beers');
     setDrinks(result.data);
   };
 
-  const [buttonsClicked, setButtonsClicked] = useState([]);
-
   useEffect(() => {
     getDrinks();
-    setButtonsClicked([buttonsClicked ? "" : "✔"]);
   }, []);
+
+  let drinkOrder = [];
+
+  const drinksToStorage = () => {
+    localStorage.setItem('drinks', JSON.stringify(drinkOrder));
+  };
+
+  const storeDrinksAndNavigate = () => {
+    drinksToStorage();
+    navigate('/date');
+    localStorage.setItem('guests', JSON.stringify(1));
+  };
 
   return (
     <Container>
@@ -52,9 +62,21 @@ function Drinks() {
                 <h5>{name}</h5>
                 {/* eslint-disable-next-line camelcase */}
                 <img src={image_url} alt="Drink thumb" height={200} />
-                <button type="button" onClick={() => setButtonsClicked("")}>
-                  [{buttonsClicked}]
-                </button>
+                <Form>
+                  {['checkbox'].map((type) => (
+                    <div key={`default-${type}`} className="mb-3">
+                      <Form.Check
+                        type={type}
+                        id={`default-${type}`}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            drinkOrder.push({ id, name });
+                          }
+                        }}
+                      />
+                    </div>
+                  ))}
+                </Form>
               </Card>
             ))}
           </Wrapper>
@@ -64,15 +86,15 @@ function Drinks() {
           <Button
             block="true"
             style={{
-              backgroundColor: "#C16757",
-              color: "#3d6053",
-              borderRadius: "100px",
-              borderColor: "#3d6053",
-              border: "3px solid",
-              width: "200px",
-              fontWeight: "600",
+              backgroundColor: '#C16757',
+              color: '#3d6053',
+              borderRadius: '100px',
+              borderColor: '#3d6053',
+              border: '3px solid',
+              width: '200px',
+              fontWeight: '600',
             }}
-            onClick={() => navigate("/date")}
+            onClick={storeDrinksAndNavigate}
           >
             Next
           </Button>
