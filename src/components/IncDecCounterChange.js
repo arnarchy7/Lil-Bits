@@ -1,11 +1,14 @@
 import { React, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function IncDecCounter() {
-  const [num, setNum] = useState(1);
+function IncDecCounterChange() {
+  const guestsString = sessionStorage.getItem('guests');
+  const guests = JSON.parse(guestsString);
+
+  const [num, setNum] = useState(guests);
   const incNum = () => {
     if (num < 10) {
-      setNum(Number(num) + 1);
+      setNum(num + 1);
     }
   };
   const decNum = () => {
@@ -49,4 +52,4 @@ function IncDecCounter() {
   );
 }
 
-export default IncDecCounter;
+export default IncDecCounterChange;

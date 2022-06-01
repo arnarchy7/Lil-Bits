@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 import Form from 'react-bootstrap/Form';
-
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -39,16 +38,18 @@ function Drinks() {
     getDrinks();
   }, []);
 
-  let drinkOrder = [];
+  const drinkOrder = [];
 
   const drinksToStorage = () => {
-    localStorage.setItem('drinks', JSON.stringify(drinkOrder));
+    sessionStorage.setItem('drinks', JSON.stringify(drinkOrder));
   };
 
   const storeDrinksAndNavigate = () => {
     drinksToStorage();
-    navigate('/date');
-    localStorage.setItem('guests', JSON.stringify(1));
+    if (drinkOrder.length !== 0) {
+      navigate('/date');
+      sessionStorage.setItem('guests', JSON.stringify(1));
+    }
   };
 
   return (
@@ -68,9 +69,12 @@ function Drinks() {
                       <Form.Check
                         type={type}
                         id={`default-${type}`}
+                        value={id}
                         onChange={(e) => {
                           if (e.target.checked) {
                             drinkOrder.push({ id, name });
+                          } else {
+                            drinkOrder.splice({ id, name }, 1);
                           }
                         }}
                       />

@@ -5,11 +5,9 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import DatePicker from 'react-datepicker';
-
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
 import IncDecCounter from './components/IncDecCounter';
-
 import EmailComponent from './components/EmailComponent';
 
 function DateAndTime() {
@@ -20,17 +18,14 @@ function DateAndTime() {
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate(0, 0, 0, 16, 0) + 1);
 
-  const dateToStorage = () => {
-    localStorage.setItem('date', JSON.stringify(startDate));
-  };
-
   const storeDateNavigate = () => {
-    localStorage.setItem('date', JSON.stringify(startDate));
-    const foo = localStorage.getItem('email');
+    sessionStorage.setItem('date', JSON.stringify(startDate));
+    const foo = sessionStorage.getItem('email');
 
     if (startDate !== null && foo !== null) {
       navigate('/summary');
     } else {
+      // eslint-disable-next-line no-alert
       alert('Please pick a time and save your email');
     }
   };
@@ -50,7 +45,6 @@ function DateAndTime() {
             showTimeSelect
             minTime={new Date(0, 0, 0, 16, 0)}
             maxTime={new Date(0, 0, 0, 23, 0)}
-            onClick={dateToStorage}
           />
         </Col>
         <Col lg={5} className="box2">

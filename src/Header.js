@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
+import { NavLink } from 'react-router-dom';
 
 import logo from './assets/logo.png';
 
@@ -15,29 +16,31 @@ function Header() {
           <img src={logo} className="App-logo" alt="logo" />
         </Col>
         <Col sm>
-          <Nav justify variant="pills" defaultActiveKey="/home">
+          <Nav justify variant="pills">
             <Nav.Item>
-              <Nav.Link href="/home">Home</Nav.Link>
+              <NavLink className="NavLink" to="/" activeclassname="active">
+                Home
+              </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="meals" disabled>
+              <NavLink className="NavLink" to="/meals" activeclassname="active">
                 Meals
-              </Nav.Link>
+              </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="drinks" disabled>
+              <NavLink className="NavLink" to="/drinks" activeclassname="active">
                 Drinks
-              </Nav.Link>
+              </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="date" disabled>
+              <NavLink className="NavLink" to="/date" activeclassname="active">
                 Date
-              </Nav.Link>
+              </NavLink>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="summary" disabled>
+              <NavLink className="NavLink" to="/summary" activeclassname="active">
                 Summary
-              </Nav.Link>
+              </NavLink>
             </Nav.Item>
           </Nav>
         </Col>

@@ -5,9 +5,9 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
+
 import { useNavigate } from 'react-router-dom';
+import EmailForm from './components/EmailForm';
 
 function Home() {
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ function Home() {
         </Col>
         <Col sm={4}>
           <Row className="box">
-            <p>Place an order</p>
+            <h4>Place an order</h4>
             <Button
               block="true"
               style={{
@@ -74,31 +74,8 @@ function Home() {
             </Button>
           </Row>
           <Row className="box">
-            <p>Change your order</p>
-            <InputGroup className="mb-3">
-              <Form.Control
-                placeholder="Your email address"
-                aria-label="Your email address"
-                aria-describedby="basic-addon2"
-              />
-              <Button
-                block="true"
-                style={{
-                  backgroundColor: '#C16757',
-                  color: '#3d6053',
-                  borderBottomRightRadius: '10px',
-                  borderTopRightRadius: '10px',
-                  borderColor: '#3d6053',
-                  border: '3px solid',
-                  width: '100px',
-                  fontWeight: '600',
-                }}
-                id="button-addon2"
-                onClick={() => navigate('/meals')}
-              >
-                Enter
-              </Button>
-            </InputGroup>
+            <h4>Change your order</h4>
+            <EmailForm />
           </Row>
         </Col>
       </Row>

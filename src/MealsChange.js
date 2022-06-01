@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Meals() {
+function MealsChange() {
   const navigate = useNavigate();
 
   const [meals, setMeals] = useState([]);
@@ -28,7 +28,7 @@ function Meals() {
 
   const storeAndNavigate = () => {
     mealToStorage();
-    navigate('/drinks');
+    navigate('/drinkschange');
   };
   return (
     <Container>
@@ -87,4 +87,4 @@ function Meals() {
   );
 }
 
-export default Meals;
+export default MealsChange;

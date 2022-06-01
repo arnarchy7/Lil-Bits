@@ -1,12 +1,13 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import { withRouter } from './withRouter';
 
 const emailState = {
   email: '',
   error: '',
 };
 
-class EmailComponent extends React.Component {
+class EmailForm extends React.Component {
   constructor() {
     super();
     this.state = emailState;
@@ -17,12 +18,15 @@ class EmailComponent extends React.Component {
     this.setState({
       email: e.target.value,
     });
+    sessionStorage.setItem('email', JSON.stringify(this.state.email));
   }
 
   onSave() {
     if (this.emailValidation()) {
       this.setState(emailState);
       sessionStorage.setItem('email', JSON.stringify(this.state.email));
+      // eslint-disable-next-line react/prop-types
+      this.props.navigate('/oldmeal');
     }
   }
 
@@ -45,7 +49,7 @@ class EmailComponent extends React.Component {
         <div className="form-group mb-3">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label>
-            <h5>Enter email to save order</h5>
+            <p>Enter email to change order</p>
           </label>
           <input
             type="email"
@@ -71,7 +75,7 @@ class EmailComponent extends React.Component {
             }}
             onClick={() => this.onSave()}
           >
-            Save
+            Change
           </button>
         </div>
       </div>
@@ -79,4 +83,4 @@ class EmailComponent extends React.Component {
   }
 }
 
-export default EmailComponent;
+export default withRouter(EmailForm);
